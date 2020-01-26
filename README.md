@@ -29,6 +29,9 @@ The container should now be running on your computer, with it's attached databas
 ## Resources
 
 Docker <https://www.docker.com/>
+
 Node <https://nodejs.org/en/>
+
 Sequelize <https://sequelize.org/>
+
 MariaDB <https://mariadb.org/>
