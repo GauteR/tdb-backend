@@ -1,29 +1,22 @@
 /*jshint esversion: 8 */
+const Auth = require("../helpers/authenticationHelper");
 
 (function () {
   'use strict';
   module.exports = {
     up: (queryInterface, Sequelize) => {
-      /*
-        Add altering commands here.
-        Return a promise to correctly handle asynchronicity.
-  
-        Example:
-        return queryInterface.bulkInsert('People', [{
-          name: 'John Doe',
-          isBetaMember: false
-        }], {});
-      */
+      return queryInterface.bulkInsert('users', [{
+        username: 'admin',
+        password: Auth.Encrypt(process.env.ADMIN_PASSWORD),
+        email: 'rnngau@gmail.com',
+        role: 'admin',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }],{});
     },
 
     down: (queryInterface, Sequelize) => {
-      /*
-        Add reverting commands here.
-        Return a promise to correctly handle asynchronicity.
-  
-        Example:
-        return queryInterface.bulkDelete('People', null, {});
-      */
+      return queryInterface.bulkDelete('users');
     }
   };
 }());

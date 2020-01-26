@@ -12,6 +12,13 @@
           type: Sequelize.INTEGER
         },
         name: {
+          allowNull: false,
+          type: Sequelize.STRING
+        },
+        desc: {
+          type: Sequelize.TEXT
+        },
+        diff: {
           type: Sequelize.STRING
         },
         planned: {
@@ -28,6 +35,10 @@
         },
         recGear: {
           type: Sequelize.STRING
+        },
+        announce: {
+          allowNull: false,
+          type: Sequelize.BOOLEAN
         },
         createdAt: {
           allowNull: false,

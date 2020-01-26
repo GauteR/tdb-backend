@@ -20,6 +20,7 @@
           type: Sequelize.STRING
         },
         email: {
+          allowNull: false,
           type: Sequelize.STRING
         },
         role: {
