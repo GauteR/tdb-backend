@@ -4,7 +4,7 @@ The API for The Devils Backbone raid system
 ## Installation
 
 1. Install NodeJS
-2. Install MariaDB
+2. Install MariaDB and create the databases: `tdb-raids`, `tdb-raids-dev` and `tdb-raids-test`.
 3. Install yarn and nodemon globally through npm, run this in your project folder: `npm i -g yarn nodemon`
 4. Install the project's packages with the command `yarn`
 5. Copy `example.env` into a file called `.env`, then edit the file with all the correct variables needed to run the container
