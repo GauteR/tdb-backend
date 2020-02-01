@@ -1,13 +1,11 @@
 /*jshint esversion: 8 */
+const Handler = require("../controllers/healthController")
 
 module.exports = {
   getHealth: {
     auth: false,
-    handler: (request, h) => {
-        return true;
-    },
+    handler: Handler.HealthCheck,
     description: "Checks health status of the API",
-    notes: "Valid claims: all",
     tags: ["api"]
   },
 };
