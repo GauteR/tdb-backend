@@ -1,4 +1,5 @@
 /*jshint esversion: 8 */
+require("dotenv").config();
 
 (function () {
     'use strict';
@@ -8,8 +9,9 @@
     const Sequelize = require('sequelize');
     const basename = path.basename(__filename);
     const db = {};
-  
-    let sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASS, {
+
+    let database_name = (process.env.NODE_ENV == "development" ? process.env.DATABASE_NAME_DEV : (process.env.NODE_ENV == "test" ? process.env.DATABASE_NAME_TEST : process.env.DATABASE_NAME_PROD));
+    let sequelize = new Sequelize(database_name, process.env.DATABASE_USER, process.env.DATABASE_PASS, {
       host: process.env.DATABASE_URI,
       dialect: "mariadb",
       pool: {

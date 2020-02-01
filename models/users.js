@@ -1,5 +1,7 @@
 /*jshint esversion: 8 */
 
+const Auth = require("../helpers/authenticationHelper");
+
 (function () {
   'use strict';
   module.exports = (sequelize, DataTypes) => {

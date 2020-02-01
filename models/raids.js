@@ -21,7 +21,7 @@
       }
     }, {});
     raids.associate = function (models) {
-      raids.hasMany(models.users);
+      raids.belongsTo(models.users);
     };
     return raids;
   };
