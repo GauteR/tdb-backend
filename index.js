@@ -9,7 +9,7 @@ require("dotenv").config();
   const LOCAL_HOST = process.env.LOCAL_HOST;
   const LOCAL_PORT = process.env.LOCAL_PORT;
 
-  const Hapi = require("hapi");
+  const Hapi = require("@hapi/hapi");
   const Pack = require("./package");
   const Routes = require("./routes");
   const CatboxMemory = require("@hapi/catbox-memory");
@@ -125,10 +125,10 @@ require("dotenv").config();
             serverMap.forEach(item => {
               paths.push(item.path);
             });
-            return Lib.SendResponseJson(request, h, {
+            return {
               success: true,
               data: paths
-            }, 200);
+            };
           }
         }
       }
