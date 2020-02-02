@@ -1,10 +1,9 @@
 /*jshint esversion: 8 */
 const Joi = require("@hapi/joi");
-const Handler = require("../controllers/userController")
+const Handler = require("../controllers/userController");
 
 module.exports = {
     Create: {
-        auth: false, // TODO Remove this once authentication is in place
         handler: Handler.CreateUser,
         description: "Creates a new user",
         tags: ["api"],
@@ -18,7 +17,6 @@ module.exports = {
         }
     },
     Read: {
-        auth: false, // TODO Remove this once authentication is in place
         handler: Handler.ReadUser,
         description: "Gets a specific user's info",
         tags: ["api"],
@@ -33,13 +31,11 @@ module.exports = {
         }
     },
     ReadAll: {
-        auth: false, // TODO Remove this once authentication is in place
         handler: Handler.ReadAllUsers,
         description: "Gets a list of all users",
         tags: ["api"]
     },
     Update: {
-        auth: false, // TODO Remove this once authentication is in place
         handler: Handler.UpdateUser,
         description: "Updates user info of a specified user",
         notes: "This request will overwrite current values for the user.",
@@ -57,7 +53,6 @@ module.exports = {
         }
     },
     Delete: {
-        auth: false, // TODO Remove this once authentication is in place
         handler: Handler.DeleteUser,
         description: "Deletes a user",
         tags: ["api"],
