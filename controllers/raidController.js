@@ -2,6 +2,7 @@
 
 const db = require("../models/index");
 const Lib = require("../helpers/generalHelper");
+const { Op } = require("sequelize");
 
 module.exports = {
   CreateRaid: async (request, h) => {
@@ -140,6 +141,59 @@ module.exports = {
           console.error(err);
           return { success: false, error: err };
         });
+    }
+    else {
+      return { success: false, error: "Unauthorized" }
+    }
+  },
+  GenerateInvites: async(request, h) => {
+    var _decoded = Lib.ParseToken(request.headers.authorization);
+
+    if (Lib.RequireRole("admin", _decoded) || Lib.RequireRole("raid_leader", _decoded) || Lib.RequireRole("raid_assist", _decoded)) {
+      return db.raid_signup.findAll({
+        where: {
+          "raidId": request.params.raidId
+        },
+        include: [
+          {
+            model: db.raids
+          },
+          {
+            model: db.characters,
+            where: {
+              [Op.not]: [
+                { "userId": _decoded.data.id }
+              ]
+            },
+            order: [
+              [ db.characters, 'realm', 'ASC' ],
+              [ db.characters, 'name', 'ASC' ]
+            ]
+          },
+          {
+            model: db.status,  
+            where: {
+              [Op.or]: [
+                { name: "Raid leader" },
+                { name: "Raid assist" },
+                { name: "Drafted" }
+              ]
+            }
+          }
+        ]
+      })
+      .then(signups => {
+        console.log(signups);
+        var inv_script = "";
+        signups.forEach(element => {
+          inv_script += `/inv ${element.character.name}-${element.character.realm}\n`;
+        });
+        return inv_script;
+      })
+      .catch(err => {
+        console.error(err);
+        return { success: false, error: err };
+      });
     }
     else {
       return { success: false, error: "Unauthorized" }

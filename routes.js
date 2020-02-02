@@ -70,4 +70,9 @@ module.exports = [
     path: "/v1/raids/{raidId}",
     config: Raids.Delete
   },
+  {
+    method: "GET",
+    path: "/v1/raids/{raidId}/invites",
+    config: Raids.GenerateInvites
+  },
 ];

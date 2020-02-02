@@ -82,5 +82,15 @@ module.exports = {
                 "raidId": Joi.number().integer().required().description("The raid identificator")
             }
         }
+    },
+    GenerateInvites: {
+        handler: Handler.GenerateInvites,
+        description: "Generates invites for a specified raid",
+        tags: ["api"],
+        validate: {
+            params: {
+                "raidId": Joi.number().integer().required().description("The raid identificator")
+            }
+        }
     }
 };

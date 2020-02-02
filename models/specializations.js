@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     raidrole: DataTypes.STRING
   }, {});
   specializations.associate = function(models) {
-    // associations can be defined here
+    specializations.belongsTo(models.characters);
   };
   return specializations;
 };

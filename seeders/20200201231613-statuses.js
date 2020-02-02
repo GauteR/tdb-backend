@@ -2,12 +2,20 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('signup_status', [{
-      name: 'Signed up',
+    return queryInterface.bulkInsert('statuses', [{
+      name: 'Unavailable',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      name: 'Approved',
+      name: 'Raid leader',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      name: 'Raid assist',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      name: 'Available',
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -15,13 +23,13 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      name: 'Unavailable',
+      name: 'Drafted',
       createdAt: new Date(),
       updatedAt: new Date()
     }],{});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('signup_status');
+    return queryInterface.bulkDelete('statuses');
   }
 };
