@@ -1023,6 +1023,11 @@ ini@^1.3.4:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
 
+inspirational-quotes@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/inspirational-quotes/-/inspirational-quotes-1.0.8.tgz#18220cc3e421bdd3b83b0d2804d6317f4731981e"
+  integrity sha512-G6bUixnxETEac36tXWT/EuSJ2BzZ+smiBb8cKYLYOiGgdaRnBiwhMouLB+l0eLmAa3Pokz04pto6i4Ro2UomkA==
+
 is-bluebird@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-bluebird/-/is-bluebird-1.0.2.tgz#096439060f4aa411abee19143a84d6a55346d6e2"
