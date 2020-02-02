@@ -10,8 +10,10 @@ module.exports = {
     var _decoded = Lib.ParseToken(request.headers.authorization);
 
     if (Lib.RequireRole("admin", _decoded) || Lib.RequireRole("raid_leader", _decoded)) {
+      var userId = _decoded.data.id;
       return await db.raids.create(
         {
+          userId: userId,
           name: payload.name,
           desc: payload.desc,
           diff: payload.diff,
@@ -84,7 +86,7 @@ module.exports = {
     var _decoded = Lib.ParseToken(request.headers.authorization);
 
     if (Lib.RequireRole("admin", _decoded) || Lib.RequireRole("raid_leader", _decoded)) {
-      let updateFields = [];
+      let updateFields = ["userId"];
       if (payload.name) updateFields.push('name');
       if (payload.desc) updateFields.push('desc');
       if (payload.diff) updateFields.push('diff');
@@ -98,6 +100,7 @@ module.exports = {
 
       let promises = [
         db.raids.update({
+          userId: _decoded.data.id,
           name: payload.name,
           desc: payload.desc,
           diff: payload.diff,
