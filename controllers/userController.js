@@ -44,7 +44,7 @@ module.exports = {
             });
     },
     SearchUser: async (_username) => {
-        return await db.user.findOne({
+        return await db.users.findOne({
             where: { "username": _username }
           })
             .then(user => {
