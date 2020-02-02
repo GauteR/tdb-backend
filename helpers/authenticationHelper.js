@@ -38,6 +38,7 @@ module.exports = {
   },
   GenerateToken: (req, user) => {
     return JWT.sign({
+      id: user.id,
       user_name: user.username,
       user_role: user.role,
       user_hash: user.password,
