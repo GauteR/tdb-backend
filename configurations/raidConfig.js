@@ -4,7 +4,6 @@ const Handler = require("../controllers/raidController");
 
 module.exports = {
     Create: {
-        auth: false, // TODO Remove this once authentication is in place
         handler: Handler.CreateRaid,
         description: "Creates a new raid",
         tags: ["api"],
@@ -49,7 +48,6 @@ module.exports = {
         tags: ["api"]
     },
     Update: {
-        auth: false, // TODO Remove this once authentication is in place
         handler: Handler.UpdateRaid,
         description: "Updates raid info of a specified raid",
         notes: "This request will overwrite current values for the raid.",
@@ -73,7 +71,6 @@ module.exports = {
         }
     },
     Delete: {
-        auth: false, // TODO Remove this once authentication is in place
         handler: Handler.DeleteRaid,
         description: "Deletes a raid",
         tags: ["api"],
