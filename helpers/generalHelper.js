@@ -1,4 +1,5 @@
 /*jshint esversion: 8 */
+const JWT = require('jsonwebtoken');
 
 module.exports = {
     ParseToken: (token) => {
