@@ -24,6 +24,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      realm: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       armoryLink: {
         type: Sequelize.STRING
       },

@@ -1,13 +1,16 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const characters = sequelize.define('characters', {
+    raceId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
     name: {
       allowNull: false,
       type: DataTypes.STRING
     },
-    raceId: {
-      allowNull: false,
-      type: DataTypes.INTEGER
+    realm: {
+      type: DataTypes.STRING
     },
     armoryLink: DataTypes.STRING,
     isMain: {
@@ -19,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     characters.belongsTo(models.users);
     characters.hasMany(models.raid_signup);
     characters.hasOne(models.specializations);
+    characters.hasOne(models.races);
   };
   return characters;
 };
