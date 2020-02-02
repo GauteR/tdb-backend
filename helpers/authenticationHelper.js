@@ -7,12 +7,27 @@ const bcrypt = require('bcryptjs'), saltRounds = 10;
 module.exports = {
   Validate: async (decoded, request, callback) => {
     var now = Math.floor(new Date().getTime() / 1000);
-
-    // Check if consumer exists
-    return await Db.Login(request.payload.username, request.payload.password).then(user => {
-      // Is token expired?
-      if (decoded.nbf < now && decoded.exp > now) {
-        return { isValid: true };
+    
+    // Check if user exists
+    return await Db.Authenticate(decoded.user_name).then(user => {
+      if(user.success) {
+        var userdata = user.data.dataValues;
+        // Is password correct?
+        if (userdata.password === decoded.user_hash) {
+          // Is token expired?
+          if (decoded.nbf < now && decoded.exp > now) {
+            return { isValid: true };
+          }
+          else {
+            return { isValid: false };
+          }
+        }
+        else {
+          return { isValid: false };
+        }
+      }
+      else {
+        return { isValid: false };
       }
     })
       .catch(err => {
@@ -23,16 +38,22 @@ module.exports = {
   },
   GenerateToken: (req, user) => {
     return JWT.sign({
-      username: user.username,
-      userrole: user.role,
-      exp: Math.floor(Date.now() / 1000) + 15 * 60, // int
-      nbf: Math.floor(Date.now() / 1000) - 10, // int
+      user_name: user.username,
+      user_role: user.role,
+      user_hash: user.password,
+      exp: Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60, // Expires: in 30 days
+      nbf: Math.floor(Date.now() / 1000) - 10, // Not before: 10 seconds in the past
     }, process.env.JWT_SECRET);
   },
   Encrypt: (decrypted) => {
     return bcrypt.hashSync(decrypted, bcrypt.genSaltSync(saltRounds));
   },
   Compare: (inputString, hashed) => {
-    return bcrypt.compareSync(inputString, hashed);
+    if (inputString != undefined || inputString != null) {
+      return bcrypt.compareSync(inputString, hashed);
+    }
+    else {
+      return false;
+    }
   }
 };

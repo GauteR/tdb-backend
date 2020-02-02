@@ -2,8 +2,15 @@
 
 const Health = require("./configurations/healthConfig");
 const Users = require("./configurations/userConfig");
+const Authentication = require("./configurations/authConfig");
 
 module.exports = [
+  // Authentication
+  {
+    method: "POST",
+    path: "/auth",
+    config: Authentication.AuthenticateUser
+  },
   // Health
   {
     method: "GET",
