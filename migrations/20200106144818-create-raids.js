@@ -11,6 +11,10 @@
           primaryKey: true,
           type: Sequelize.INTEGER
         },
+        userId: {
+          allowNull: false,
+          type: Sequelize.INTEGER
+        },
         name: {
           allowNull: false,
           type: Sequelize.STRING
@@ -30,7 +34,10 @@
         minHealers: {
           type: Sequelize.INTEGER
         },
-        minDamage: {
+        minMelee: {
+          type: Sequelize.INTEGER
+        },
+        minRanged: {
           type: Sequelize.INTEGER
         },
         recGear: {
