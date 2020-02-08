@@ -3,6 +3,7 @@
 const Health = require("./configurations/healthConfig");
 const Users = require("./configurations/userConfig");
 const Raids = require("./configurations/raidConfig");
+const Chars = require("./configurations/characterConfig");
 const Authentication = require("./configurations/authConfig");
 
 module.exports = [
@@ -74,5 +75,31 @@ module.exports = [
     method: "GET",
     path: "/v1/raids/{raidId}/invites",
     config: Raids.GenerateInvites
+  },
+  // Characters
+  {
+    method: "GET",
+    path: "/v1/chars",
+    config: Chars.ReadAll
+  },
+  {
+    method: "GET",
+    path: "/v1/chars/{charId}",
+    config: Chars.Read
+  },
+  {
+    method: "POST",
+    path: "/v1/chars",
+    config: Chars.Create
+  },
+  {
+    method: "PUT",
+    path: "/v1/chars/{charId}",
+    config: Chars.Update
+  },
+  {
+    method: "DELETE",
+    path: "/v1/chars/{charId}",
+    config: Chars.Delete
   },
 ];

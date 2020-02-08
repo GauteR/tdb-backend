@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   }, {});
   races.associate = function(models) {
-    races.belongsTo(models.characters);
+    races.hasOne(models.characters);
   };
   return races;
 };

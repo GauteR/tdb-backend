@@ -1,7 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const characters = sequelize.define('characters', {
+    userId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
     raceId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    specializationId: {
       allowNull: false,
       type: DataTypes.INTEGER
     },
@@ -21,8 +29,8 @@ module.exports = (sequelize, DataTypes) => {
   characters.associate = function(models) {
     characters.belongsTo(models.users);
     characters.hasMany(models.raid_signup);
-    characters.hasOne(models.specializations);
-    characters.hasOne(models.races);
+    characters.belongsTo(models.specializations);
+    characters.belongsTo(models.races);
   };
   return characters;
 };
