@@ -5,6 +5,7 @@ const Users = require("./configurations/userConfig");
 const Raids = require("./configurations/raidConfig");
 const Chars = require("./configurations/characterConfig");
 const Races = require("./configurations/raceConfig");
+const Statuses = require("./configurations/statusConfig");
 const Specs = require("./configurations/specConfig");
 const Authentication = require("./configurations/authConfig");
 
@@ -155,5 +156,31 @@ module.exports = [
     method: "DELETE",
     path: "/v1/specs/{specId}",
     config: Specs.Delete
+  },
+  // Specs
+  {
+    method: "GET",
+    path: "/v1/statuses",
+    config: Statuses.ReadAll
+  },
+  {
+    method: "GET",
+    path: "/v1/statuses/{statusId}",
+    config: Statuses.Read
+  },
+  {
+    method: "POST",
+    path: "/v1/statuses",
+    config: Statuses.Create
+  },
+  {
+    method: "PUT",
+    path: "/v1/statuses/{statusId}",
+    config: Statuses.Update
+  },
+  {
+    method: "DELETE",
+    path: "/v1/statuses/{statusId}",
+    config: Statuses.Delete
   },
 ];
