@@ -89,5 +89,33 @@ module.exports = {
                 "raidId": Joi.number().integer().required().description("The raid identificator")
             }
         }
+    },
+    Signup: {
+        handler: Handler.RaidSignup,
+        description: "Signs up the character for a raid",
+        tags: ["api"],
+        validate: {
+            params: {
+                "raidId": Joi.number().integer().required().description("The raid identificator"),
+            },
+            payload: {
+                "charId": Joi.number().integer().required().description("The character identifier"),
+                "statusId": Joi.number().integer().required().description("The status identifier"),
+            }
+        }
+    },
+    ManageSignup: {
+        handler: Handler.ManageSignup,
+        description: "Manage the specified signup for a raid",
+        tags: ["api"],
+        validate: {
+            params: {
+                "raidId": Joi.number().integer().required().description("The raid identificator"),
+                "charId": Joi.number().integer().required().description("The character identifier"),
+            },
+            payload: {
+                "statusId": Joi.number().integer().required().description("The status identifier"),
+            }
+        }
     }
 };

@@ -2,6 +2,7 @@
 
 const db = require("../models/index");
 const Lib = require("../helpers/generalHelper");
+const Status = require("./statusController");
 const { Op } = require("sequelize");
 
 module.exports = {
@@ -149,10 +150,14 @@ module.exports = {
       return { success: false, error: "Unauthorized" }
     }
   },
-  GenerateInvites: async(request, h) => {
+  GenerateInvites: async (request, h) => {
     var _decoded = Lib.ParseToken(request.headers.authorization);
 
-    if (Lib.RequireRole("admin", _decoded) || Lib.RequireRole("raid_leader", _decoded) || Lib.RequireRole("raid_assist", _decoded)) {
+    if (
+      Lib.RequireRole("admin", _decoded) ||
+      Lib.RequireRole("raid_leader", _decoded) ||
+      Lib.RequireRole("raid_assist", _decoded)
+    ) {
       return db.raid_signup.findAll({
         where: {
           "raidId": request.params.raidId
@@ -169,12 +174,12 @@ module.exports = {
               ]
             },
             order: [
-              [ db.characters, 'realm', 'ASC' ],
-              [ db.characters, 'name', 'ASC' ]
+              [db.characters, 'realm', 'ASC'],
+              [db.characters, 'name', 'ASC']
             ]
           },
           {
-            model: db.status,  
+            model: db.status,
             where: {
               [Op.or]: [
                 { name: "Raid leader" },
@@ -185,13 +190,83 @@ module.exports = {
           }
         ]
       })
-      .then(signups => {
-        console.log(signups);
-        var inv_script = "";
-        signups.forEach(element => {
-          inv_script += `/inv ${element.character.name}-${element.character.realm}\n`;
+        .then(signups => {
+          console.log(signups);
+          var inv_script = "";
+          signups.forEach(element => {
+            inv_script += `/inv ${element.character.name}-${element.character.realm}\n`;
+          });
+          return inv_script;
+        })
+        .catch(err => {
+          console.error(err);
+          return { success: false, error: err };
         });
-        return inv_script;
+    }
+    else {
+      return { success: false, error: "Unauthorized" }
+    }
+  },
+  RaidSignup: async (request, h) => {
+    let payload = request.payload;
+    let params = request.params;
+    var _decoded = Lib.ParseToken(request.headers.authorization);
+
+    if (
+      Lib.RequireRole("admin", _decoded) || 
+      Lib.RequireRole("raid_leader", _decoded) || 
+      Lib.RequireRole("raid_assist", _decoded) || 
+      Lib.RequireRole("member", _decoded)
+    ) {
+      return db.raid_signup.findOrCreate({
+        where: {
+          "characterId": payload.charId,
+          "raidId": params.raidId
+        },
+        defaults: {
+          "characterId": payload.charId,
+          "raidId": params.raidId,
+          "statusId": payload.statusId
+        }
+      })
+      .then(signup => {
+        return { success: true, data: signup[0] };
+      })
+      .catch(err => {
+        console.error(err);
+        return { success: false, error: err };
+      });
+    }
+    else {
+      return { success: false, error: "Unauthorized" }
+    }
+  },
+  ManageSignup: async (request, h) => {
+    let payload = request.payload;
+    let params = request.params;
+    var _decoded = Lib.ParseToken(request.headers.authorization);
+
+    if (
+      Lib.RequireRole("admin", _decoded) || 
+      Lib.RequireRole("raid_leader", _decoded) || 
+      Lib.RequireRole("raid_assist", _decoded)
+    ) {
+      return db.raid_signup.update({
+        statusId: payload.statusId
+      }, {
+        where: { 
+          raidId: params.raidId, 
+          characterId: params.charId 
+        },
+        fields: [ "statusId" ]
+      })
+      .then(res => {
+        if(res == 1) {
+          return { success: true };
+        }
+        else {
+          return { success: false };
+        }
       })
       .catch(err => {
         console.error(err);

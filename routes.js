@@ -79,6 +79,16 @@ module.exports = [
     path: "/v1/raids/{raidId}/invites",
     config: Raids.GenerateInvites
   },
+  {
+    method: "POST",
+    path: "/v1/raids/{raidId}/invites",
+    config: Raids.Signup
+  },
+  {
+    method: "PUT",
+    path: "/v1/raids/{raidId}/invites/{charId}/manage",
+    config: Raids.ManageSignup
+  },
   // Characters
   {
     method: "GET",
