@@ -52,9 +52,9 @@ module.exports = {
                 "name": _name
             }
         })
-            .then(race => {
-                if (race != null) {
-                    return { success: true, data: race };
+            .then(specialization => {
+                if (specialization != null) {
+                    return { success: true, data: specialization };
                 }
                 else {
                     return { success: false, error: "Could not find specialization" };

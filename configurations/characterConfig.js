@@ -19,6 +19,7 @@ module.exports = {
         }
     },
     Read: {
+        auth: false,
         handler: Handler.ReadCharacter,
         description: "Gets one character with the specific id",
         tags: ["api"],
@@ -29,6 +30,7 @@ module.exports = {
         }
     },
     ReadAll: {
+        auth: false,
         handler: Handler.ReadAllCharacters,
         description: "Gets all characters",
         tags: ["api"]
