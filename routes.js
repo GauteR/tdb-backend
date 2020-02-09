@@ -4,6 +4,7 @@ const Health = require("./configurations/healthConfig");
 const Users = require("./configurations/userConfig");
 const Raids = require("./configurations/raidConfig");
 const Chars = require("./configurations/characterConfig");
+const Races = require("./configurations/raceConfig");
 const Authentication = require("./configurations/authConfig");
 
 module.exports = [
@@ -101,5 +102,31 @@ module.exports = [
     method: "DELETE",
     path: "/v1/chars/{charId}",
     config: Chars.Delete
+  },
+  // Races
+  {
+    method: "GET",
+    path: "/v1/races",
+    config: Races.ReadAll
+  },
+  {
+    method: "GET",
+    path: "/v1/races/{raceId}",
+    config: Races.Read
+  },
+  {
+    method: "POST",
+    path: "/v1/races",
+    config: Races.Create
+  },
+  {
+    method: "PUT",
+    path: "/v1/races/{raceId}",
+    config: Races.Update
+  },
+  {
+    method: "DELETE",
+    path: "/v1/races/{raceId}",
+    config: Races.Delete
   },
 ];
