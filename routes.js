@@ -8,8 +8,15 @@ const Races = require("./configurations/raceConfig");
 const Statuses = require("./configurations/statusConfig");
 const Specs = require("./configurations/specConfig");
 const Authentication = require("./configurations/authConfig");
+const Funny = require("./configurations/funnyConfig");
 
 module.exports = [
+  // Misc
+  {
+    method: "GET",
+    path: "/inspire",
+    config: Funny.GetQuote
+  },
   // Authentication
   {
     method: "POST",
