@@ -28,14 +28,11 @@ const Auth = require("../helpers/authenticationHelper");
         validate: {
           isEmail: true
         }
-      },
-      role: {
-        allowNull: false,
-        type: DataTypes.STRING
       }
     }, {});
     users.associate = function (models) {
       users.hasMany(models.characters);
+      users.belongsTo(models.user_roles);
     };
     return users;
   };
