@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  db:
+    image: mariadb:10.5
+    volumes:
+      - "data:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: development
+      MYSQL_DATABASE: tdb-raids-dev
+    expose:
+      - 3306
+  api:
+    build:
+      context: ../
+      dockerfile: docker/api/Dockerfile
+    ports:
+      - 8080:8080
+    env_file:
+      - api/docker.base.env
+    volumes:
+      - "../:/usr/src/app"
+      - "/usr/src/app/node_modules"
+      - "./api/wait-for-it.sh:/wait-for-it.sh"
+    environment:
+      DATABASE_USER: root
+      DATABASE_PASS: development
+      DATABASE_URI: db
+    command:
+      /wait-for-it.sh db:3306 -- nodemon
+
+volumes:
+  data:
