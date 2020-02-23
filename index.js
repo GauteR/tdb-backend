@@ -12,7 +12,6 @@ require("dotenv").config();
   const Hapi = require("@hapi/hapi");
   const Pack = require("./package");
   const Routes = require("./routes");
-  const CatboxMemory = require("@hapi/catbox-memory");
   const hapiAuthJWT = require("hapi-auth-jwt2");
 
   const AuthenticationHelper = require("./helpers/authenticationHelper");
@@ -26,11 +25,11 @@ require("dotenv").config();
         {
           name: "tdb_cache",
           provider: {
-            constructor: CatboxMemory
+            constructor: require("@hapi/catbox-memory")
           }
         }
       ],
-      tls: (process.env.NODE_ENV == "production" || false)
+      tls: false
     });
 
     process.on('SIGINT', function() {

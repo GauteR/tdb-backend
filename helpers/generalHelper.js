@@ -15,6 +15,6 @@ module.exports = {
             return { success: false, error: ex };
         }
     },
-    RequireRole: (role, decoded) => (decoded.data.user_role == role),
+    RequireRole: (role, decoded) => (decoded.data.user_role.includes(role)),
     IsOwnUserProfile: (username, decoded) => (typeof(username) == "string" ? (decoded.data.user_name == username) : (decoded.data.id == username))
 };

@@ -32,7 +32,6 @@ const Auth = require("../helpers/authenticationHelper");
     }, {});
     users.associate = function (models) {
       users.hasMany(models.characters);
-      users.belongsTo(models.user_roles);
     };
     return users;
   };

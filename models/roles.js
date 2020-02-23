@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   roles.associate = function(models) {
-    roles.belongsTo(models.user_roles);
   };
   return roles;
 };
