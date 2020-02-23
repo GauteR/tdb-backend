@@ -37,10 +37,12 @@ module.exports = {
       .then(result => result);
   },
   GenerateToken: (req, user) => {
+    var roles = user.roles;
+    roles.push(`user:${user.id}`);
     return JWT.sign({
       id: user.id,
       user_name: user.username,
-      user_role: user.roles,
+      user_role: roles,
       user_hash: user.password, // TODO Very insecure: remove this when we implement refresh tokens
       exp: Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60, // Expires: in 30 days
       nbf: Math.floor(Date.now() / 1000) - 10, // Not before: 10 seconds in the past

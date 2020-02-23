@@ -9,6 +9,7 @@ const Statuses = require("./configurations/statusConfig");
 const Specs = require("./configurations/specConfig");
 const Authentication = require("./configurations/authConfig");
 const Funny = require("./configurations/funnyConfig");
+const Roles = require("./configurations/rolesConfig");
 
 module.exports = [
   // Misc
@@ -54,6 +55,27 @@ module.exports = [
     method: "DELETE",
     path: "/v1/users/{userId}",
     config: Users.Delete
+  },
+  // User roles
+  {
+    method: "GET",
+    path: "/v1/roles",
+    config: Roles.ReadAll
+  },
+  {
+    method: "GET",
+    path: "/v1/users/{userId}/roles",
+    config: Roles.Read
+  },
+  {
+    method: "POST",
+    path: "/v1/users/{userId}/roles",
+    config: Roles.Create
+  },
+  {
+    method: "DELETE",
+    path: "/v1/users/{userId}/roles",
+    config: Roles.Delete
   },
   // Raids
   {
@@ -174,7 +196,7 @@ module.exports = [
     path: "/v1/specs/{specId}",
     config: Specs.Delete
   },
-  // Specs
+  // Statuses
   {
     method: "GET",
     path: "/v1/statuses",
