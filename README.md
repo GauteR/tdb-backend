@@ -11,6 +11,13 @@ The API for The Devils Backbone raid system
 6. Initialize the database by running `npx sequelize-cli db:migrate:all` and `npx sequelize-cli db:seed:all`
 7. For development, there's no need to compile the container. Just run `nodemon` which will watch your files for updates and auto-compile as they are updated.
 
+### Using docker-compose
+
+1. Make sure you have docker-compose installed
+2. `docker-compose -f docker/dev.yaml up`
+3. To initialise the migrations run `docker ps` to find the name of the api container (typically docker_api_1).
+4. `docker-compose exec $CONTAINER_NAME npx sequelize-cli db:migrate & npx sequelize-cli db:seed:all` 
+
 ## Compiling
 
 Pushing the project to GitHub's master will automatically compile the project.
