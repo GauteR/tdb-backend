@@ -11,7 +11,7 @@ module.exports = {
     // Check if user exists
     return await Db.Authenticate(decoded.user_name).then(user => {
       if(user.success) {
-        var userdata = user.data.dataValues;
+        var userdata = user.data;
         // Is password correct?
         if (userdata.password === decoded.user_hash) {
           // Is token expired?
