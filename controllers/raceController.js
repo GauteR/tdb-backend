@@ -63,7 +63,7 @@ module.exports = {
             });
     },
     ReadAllRaces: async (request, h) => {
-        return await db.races.findAll()
+        return await db.races.findAll({ attributes: ['id','name'] })
             .then(races => {
                 return { success: true, data: races };
             })

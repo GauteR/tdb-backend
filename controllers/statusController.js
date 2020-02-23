@@ -63,7 +63,7 @@ module.exports = {
             });
     },
     ReadAllStatuses: async (request, h) => {
-        return await db.status.findAll()
+        return await db.status.findAll({ attributes: ['id','name'] })
             .then(statuses => {
                 return { success: true, data: statuses };
             })

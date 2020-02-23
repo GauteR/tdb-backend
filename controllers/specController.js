@@ -66,7 +66,7 @@ module.exports = {
             });
     },
     ReadAllSpecializations: async (request, h) => {
-        return await db.specializations.findAll()
+        return await db.specializations.findAll({ attributes: ['id','class','name','raidrole'] })
             .then(specializations => {
                 return { success: true, data: specializations };
             })
