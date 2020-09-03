@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/devilsbackbone/tdb-backend#readme",
   "dependencies": {
-    "@hapi/accept": "^3.2.2",
+    "@hapi/accept": "^5.0.1",
     "@hapi/address": "^2.0.0",
     "@hapi/bell": "^10.1.0",
     "@hapi/boom": "^7.4.2",
